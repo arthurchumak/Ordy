@@ -14,15 +14,32 @@
                 {% block title %}{% endblock %}
             </a>
         </div>
+
         <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                {% if user.role.name == "client" %}
+                    <li>
+                        <a href={% url 'index' %}>
+                            ORDY
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
             <ul class="nav navbar-nav navbar-right">
+                {% if user.role.name == "client" %}
+                    <li>
+                        <a href={% url 'order:client' %}>
+                            {% trans "My orders" %}
+                        </a>
+                    </li>
+                {% endif %}
                 <li>
-                    <a href="/account">
+                    <a href={% url 'account:edit' %}>
                         {% trans "Account" %}
                     </a>
                 </li>
                 <li>
-                    <a href="/logout">
+                    <a href={% url 'auth:logout' %}>
                         {% trans "Log out" %}
                     </a>
                 </li>

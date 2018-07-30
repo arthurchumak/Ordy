@@ -1,0 +1,42 @@
+{% extends "../layouts/splitted.html" %}
+
+{% load i18n %}
+
+{% block left %}
+    <div class="content">
+        <h3>{{ place.type }} - {{ place.name }}</h3>
+        <p>{{ place.address }}</p>
+        <p>{{ place.phone }}</p>
+        <p>{{ place.open_time }} - {{ place.close_time }}</p>
+        <div id="map" class="image"></div>
+    </div>
+{% endblock %}
+
+{% block right %}
+<div class="header">
+    <h4 class="title">Order</h4>
+</div>
+<div class="content">
+    <div class="model-form">
+        <form method="post" action="{{ form_action }}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-info btn-fill pull-right">
+                Save
+            </button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $.get("https://geocode-maps.yandex.ru/1.x/?format=json&geocode='{{ place.address }}'").then(res => {
+            var coord = res.response.GeoObjectCollection.featureMember["0"].GeoObject.Point.pos.replace(' ', ',');
+            var link = 'https://static-maps.yandex.ru/1.x/?ll=' + coord + '&z=16&l=map&pt=' + coord + ',org';
+            document.getElementById("map").innerHTML = '<img src="' + link + '">';
+        });
+    </script>
+{% endblock %}
+

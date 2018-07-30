@@ -1,0 +1,55 @@
+{% extends "../body.html" %}
+
+{% load i18n %}
+
+{% block content %}
+{% if list_active %}
+    <h1>
+        Active
+    </h1>
+
+    <div class="card">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    {% for field in fields %}
+                        <td>{{ field }}</td>
+                    {% endfor %}
+                    <th class="col-md-1"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in list %}
+                <tr>
+                    {% for value in obj.table_values %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                    <td>
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href={{ obj.edit_link }}>Edit</a>
+                                </li>
+                                <li>
+                                    <a href={{ obj.remove_link }}>Delete</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="header">
+        <h3 class="title">No orders</h3>
+    </div>
+    <div></div>
+{% endif %}
+
+{% endblock %}
+

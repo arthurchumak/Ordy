@@ -1,0 +1,130 @@
+{% load i18n %}
+
+<div class="sidebar-wrapper">
+    <div class="logo">
+        <a href={% url 'index' %} class="simple-text">
+            Ordy - {{ user.role.name }}
+        </a>
+    </div>
+
+    <ul class="nav">
+        {% if user.role.name == "admin" %}
+            <li
+                {% if sidebar == "manager" %}class="active"{% endif %}
+            >
+                <a href={% url 'manager:index' %}>
+                    <i class="pe-7s-id"></i>
+                    <p>{% trans "Managers" %}</p>
+                </a>
+            </li>
+            <li
+                {% if sidebar == "placetype" %}class="active"{% endif %}
+            >
+                <a href={% url 'placetype:index' %}>
+                    <i class="pe-7s-network"></i>
+                    <p>{% trans "Place types" %}</p>
+                </a>
+            </li>
+            <li
+                {% if sidebar == "currency" %}class="active"{% endif %}
+            >
+                <a href={% url 'currency:index' %}>
+                    <i class="pe-7s-cash"></i>
+                    <p>{% trans "Currencies" %}</p>
+                </a>
+            </li>
+            <li
+                {% if sidebar == "country" %}class="active"{% endif %}
+            >
+                <a href={% url 'country:index' %}>
+                    <i class="pe-7s-world"></i>
+                    <p>{% trans "Countries" %}</p>
+                </a>
+            </li>
+            <li
+                {% if sidebar == "city" %}class="active"{% endif %}
+            >
+                <a href={% url 'city:index' %}>
+                    <i class="pe-7s-culture"></i>
+                    <p>{% trans "Cities" %}</p>
+                </a>
+            </li>
+        {% elif user.role.name == "manager" %}
+            <li
+                {% if sidebar == "tariff" %}class="active"{% endif %}
+            >
+                <a href={% url 'tariff:index' %}>
+                    <i class="pe-7s-piggy"></i>
+                    <p>Tariffs</p>
+                </a>
+            </li>
+            <li
+                {% if sidebar == "partner" %}class="active"{% endif %}
+            >
+                <a href={% url 'partner:index' %}>
+                    <i class="pe-7s-wallet"></i>
+                    <p>Partners</p>
+                </a>
+            </li>
+            <li
+                {% if sidebar == "client" %}class="active"{% endif %}
+            >
+                <a href={% url 'client:index' %}>
+                    <i class="pe-7s-users"></i>
+                    <p>Clients</p>
+                </a>
+            </li>
+            <li
+                {% if sidebar == "statistics" %}class="active"{% endif %}
+            >
+                <a href={% url 'index' %}>
+                    <i class="pe-7s-graph1"></i>
+                    <p>Statistics</p>
+                </a>
+            </li>
+        {% elif user.role.name == "partner" %}
+            <li
+                {% if sidebar == "place" %}class="active"{% endif %}
+            >
+                <a href={% url 'place:index' %}>
+                    <i class="pe-7s-map-2"></i>
+                    <p>Places</p>
+                </a>
+            </li>
+            <li
+                {% if sidebar == "order" %}class="active"{% endif %}
+            >
+                <a href={% url 'order:partner' %}>
+                    <i class="pe-7s-wallet"></i>
+                    <p>Orders</p>
+                </a>
+            </li>
+            <li
+                {% if sidebar == "statistics" %}class="active"{% endif %}
+            >
+                <a href={% url 'index' %}>
+                    <i class="pe-7s-graph1"></i>
+                    <p>Statistics</p>
+                </a>
+            </li>
+        {% elif user.role.name == "client" %}
+            <li
+                {% if sidebar == "place" %}class="active"{% endif %}
+            >
+                <a href={% url 'index' %}>
+                    <i class="pe-7s-map-2"></i>
+                    <p>Places</p>
+                </a>
+            </li>
+            <li
+                {% if sidebar == "event" %}class="active"{% endif %}
+            >
+                <a href={% url 'index' %}>
+                    <i class="pe-7s-speaker"></i>
+                    <p>Events</p>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+
+</div>

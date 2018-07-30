@@ -1,0 +1,27 @@
+{% extends "body.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    {% for place in places %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="image">
+                    <img src={{ place.random_photo }}>
+                    <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&amp;fm=jpg&amp;h=300&amp;q=75&amp;w=400" alt="...">
+                </div>
+                <div class="content text-center">
+                      <h4 class="title">
+                          <a href={% url "order:place" place.id %}>
+                              {{ place.name }}
+                          </a>
+                      </h4>
+                    <p class="description text-center">
+                        {{ place.address }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
